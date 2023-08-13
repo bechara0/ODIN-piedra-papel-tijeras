@@ -1,3 +1,6 @@
+let playerPoint = 0;
+let pcPoint = 0;
+
 function getComputerChoise() {
   let choiceArray = ["ROCK", "PAPER", "SCISSORS"];
   let computerChoice =
@@ -5,7 +8,7 @@ function getComputerChoise() {
   return computerChoice;
 }
 
-function playRound(playerPoint) {
+function playRound() {
   let userChoice = prompt("Choice: Rock, Paper or scissors").toUpperCase();
   let pcChoice = getComputerChoise();
   console.log(`User choice: ${userChoice} // PC choice: ${pcChoice}`);
@@ -23,25 +26,34 @@ function playRound(playerPoint) {
       (userChoice === "SCISSORS" && pcChoice === "PAPER")
     ) {
       console.log(`You WIN, ${userChoice} beats ${pcChoice}`);
-      playerPoint = 1;
-      console.log("Player point:", playerPoint);
+      playerPoint += 1;
     } else {
       console.log(`You losse, ${pcChoice} beats ${userChoice}`);
+      pcPoint += 1;
     }
   } else {
     console.log(userChoice + " is ivalid, enter a correct choise");
   }
 }
-let playerPoint = 0;
+
 function game() {
+  console.log(`Partial results: Player: ${playerPoint}, PC: ${pcPoint}`);
   for (let games = 1; games <= 5; games++) {
-    playRound(playerPoint);
+    console.log("-_-_-_-_-_-_-");
+    playRound();
     console.log(`Game ${games} of 5`);
-    let base = 0;
-    let wins = base + playerPoint;
-    console.log("wins: ", wins);
+    console.log(`Partial results: Player: ${playerPoint}, PC: ${pcPoint}`);
   }
   console.log("___Game Over___");
+  console.log("Player points final: " + playerPoint);
+  console.log("PC points final: " + pcPoint);
+  if (playerPoint > pcPoint) {
+    console.log("Te winner is USER, with " + playerPoint + " points");
+  } else if (playerPoint < pcPoint) {
+    console.log("Te winner is PC, with " + pcPoint + " points");
+  } else {
+    console.log("The final result is Tie!");
+  }
 }
 
 game();
