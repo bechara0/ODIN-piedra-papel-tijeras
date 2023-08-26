@@ -19,6 +19,13 @@
         box-shadow: 2px 2px 5px black;
       }
 
+      #inGame {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
       .btn-rock,
       .btn-paper,
       .btn-scissors {
@@ -26,9 +33,13 @@
         height: 100px;
         cursor: pointer;
       }
+
       .principal {
         display: flex;
         justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
       }
       .btn-container {
         margin: 30px;
@@ -39,9 +50,37 @@
         flex-wrap: wrap;
       }
       #start {
-        width: 150px;
+        width: 190px;
         padding: 3px;
-        height: 50px;
+        height: 80px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        border-radius: 15px;
+      }
+      #Choices,
+      #games,
+      #score {
+        font-size: 2.2rem;
+        text-align: center;
+        font-weight: bold;
+      }
+      #result {
+        font-size: 3rem;
+        font-weight: 800;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        text-align: center;
+
+        margin: 45px;
+      }
+      .buttonReset {
+        background-color: blueviolet;
+        color: white;
+        width: 200px;
+        height: 100px;
+        font-size: 2.2rem;
+        font-weight: bold;
+        justify-content: center;
+        border-radius: 15px;
       }
     </style>
   </head>
@@ -69,7 +108,10 @@
       </div>
     </div>
     <div id="inGame">
-      <p id="computerChoise"></p>
+      <p id="Choices"></p>
+      <p id="games"></p>
+      <p id="score"></p>
+      <p id="result"></p>
     </div>
     <script src="./solution.js"></script>
   </body>

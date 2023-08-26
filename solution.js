@@ -1,6 +1,7 @@
 let playerPoint = 0;
 let pcPoint = 0;
 let userChoice = "";
+let pcChoice = "";
 
 // player choice
 function choiceUser() {
@@ -29,16 +30,8 @@ function getComputerChoise() {
 }
 
 // game logic
-function playRound(userChoice) {
-  let pcChoice = getComputerChoise();
-
+function playRound(userChoice, pcChoice) {
   console.log(`User choice: ${userChoice} // PC choice: ${pcChoice}`);
-
-  const inGame = document.querySelector("#inGame");
-  const choicePc = document.querySelector("#computerChoice");
-
-  choicePc.textContent = "El PC ha elejido: " + pcChoice;
-  inGame.appendChild(choicePc);
 
   if (
     userChoice === "ROCK" ||
@@ -67,21 +60,43 @@ function playRound(userChoice) {
 async function game() {
   console.log(`Partial results: Player: ${playerPoint}, PC: ${pcPoint}`);
   for (let games = 1; games <= 5; games++) {
-    console.log("-_-_-_-_-_-_-");
     const userChoice = await choiceUser();
-    playRound(userChoice);
-    console.log(`Game ${games} of 5`);
-    console.log(`Partial results: Player: ${playerPoint}, PC: ${pcPoint}`);
-  }
-  console.log("___Game Over___");
-  console.log("Player points final: " + playerPoint);
-  console.log("PC points final: " + pcPoint);
-  if (playerPoint > pcPoint) {
-    console.log("Te winner is USER, with " + playerPoint + " points");
-  } else if (playerPoint < pcPoint) {
-    console.log("Te winner is PC, with " + pcPoint + " points");
-  } else {
-    console.log("The final result is Tie!");
+    const pcChoice = getComputerChoise();
+    playRound(userChoice, pcChoice);
+    const inGame = document.querySelector("#inGame");
+    const choices = document.querySelector("#Choices");
+    if (choices) {
+      choices.textContent = `PC: ${pcChoice} -- USER: ${userChoice}`;
+      inGame.appendChild(choices);
+    }
+    const gaming = document.querySelector("#games");
+    const score = document.querySelector("#score");
+
+    if (games > 0) {
+      gaming.textContent = `Game ${games} of 5`;
+      inGame.appendChild(gaming);
+      score.textContent = `Partial Score: USER: ${playerPoint} // PC: ${pcPoint}`;
+      inGame.appendChild(score);
+    }
+
+    const result = document.querySelector("#result");
+    if (games === 5) {
+      if (playerPoint > pcPoint) {
+        result.textContent = "You WIN!!!";
+      } else if (playerPoint < pcPoint) {
+        result.textContent = "You LOOSE!!!";
+      } else {
+        result.textContent = "It`s a TIE!!!";
+      }
+      const buttonReset = document.createElement("button");
+      buttonReset.classList.add("buttonReset");
+      buttonReset.textContent = "Play Again";
+      buttonReset.id = "#reset";
+      inGame.appendChild(buttonReset);
+      buttonReset.addEventListener("click", () => {
+        location.reload();
+      });
+    }
   }
 }
 
