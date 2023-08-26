@@ -1,6 +1,26 @@
 let playerPoint = 0;
 let pcPoint = 0;
+let userChoice = "";
 
+// player choice
+function choiceUser() {
+  return new Promise((resolve) => {
+    const rock = document.querySelector("#rock");
+    rock.addEventListener("click", () => {
+      resolve("ROCK");
+    });
+    const paper = document.querySelector("#paper");
+    paper.addEventListener("click", () => {
+      resolve("PAPER");
+    });
+    const scissors = document.querySelector("#scissors");
+    scissors.addEventListener("click", () => {
+      resolve("SCISSORS");
+    });
+  });
+}
+
+// computer choise
 function getComputerChoise() {
   let choiceArray = ["ROCK", "PAPER", "SCISSORS"];
   let computerChoice =
@@ -8,10 +28,17 @@ function getComputerChoise() {
   return computerChoice;
 }
 
-function playRound() {
-  let userChoice = prompt("Choice: Rock, Paper or scissors").toUpperCase();
+// game logic
+function playRound(userChoice) {
   let pcChoice = getComputerChoise();
+
   console.log(`User choice: ${userChoice} // PC choice: ${pcChoice}`);
+
+  const inGame = document.querySelector("#inGame");
+  const choicePc = document.querySelector("#computerChoice");
+
+  choicePc.textContent = "El PC ha elejido: " + pcChoice;
+  inGame.appendChild(choicePc);
 
   if (
     userChoice === "ROCK" ||
@@ -36,11 +63,13 @@ function playRound() {
   }
 }
 
-function game() {
+// game structure
+async function game() {
   console.log(`Partial results: Player: ${playerPoint}, PC: ${pcPoint}`);
   for (let games = 1; games <= 5; games++) {
     console.log("-_-_-_-_-_-_-");
-    playRound();
+    const userChoice = await choiceUser();
+    playRound(userChoice);
     console.log(`Game ${games} of 5`);
     console.log(`Partial results: Player: ${playerPoint}, PC: ${pcPoint}`);
   }
@@ -56,4 +85,9 @@ function game() {
   }
 }
 
-game();
+buttonStart = document.querySelector("#start");
+buttonStart.addEventListener("click", () => {
+  game();
+});
+
+// game();

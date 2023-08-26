@@ -4,8 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock, Paper, Scissors</title>
+    <style>
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+      }
+      h3 {
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      button {
+        border: none;
+        box-shadow: 2px 2px 5px black;
+      }
+
+      .btn-rock,
+      .btn-paper,
+      .btn-scissors {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+      }
+      .principal {
+        display: flex;
+        justify-content: center;
+      }
+      .btn-container {
+        margin: 30px;
+        width: 60%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      #start {
+        width: 150px;
+        padding: 3px;
+        height: 50px;
+      }
+    </style>
   </head>
   <body>
+    <h1>Rock, Paper, Scissors</h1>
+    <h3>Make your choice...</h3>
+    <div class="principal">
+      <div class="btn-container">
+        <button value="ROCK" id="rock">
+          <img class="btn-rock" src="./rock.jpg" alt="image of a rock" />
+        </button>
+        <button value="PAPER" id="paper">
+          <img class="btn-paper" src="./paper.jpg" alt="image of a paper" />
+        </button>
+        <button value="SCISSORS" id="scissors">
+          <img
+            class="btn-scissors"
+            src="./scissors2.jpg"
+            alt="image of a scissor"
+          />
+        </button>
+      </div>
+      <div class="start">
+        <button id="start">Start Game</button>
+      </div>
+    </div>
+    <div id="inGame">
+      <p id="computerChoise"></p>
+    </div>
     <script src="./solution.js"></script>
   </body>
 </html>
